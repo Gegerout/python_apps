@@ -29,6 +29,9 @@ class Notepad:
         self.edit_menu.add_command(label="Cut", command=self.cut_text, accelerator="Ctrl+X")
         self.edit_menu.add_command(label="Copy", command=self.copy_text, accelerator="Ctrl+C")
         self.edit_menu.add_command(label="Paste", command=self.paste_text, accelerator="Ctrl+V")
+        self.edit_menu.add_separator()
+        self.edit_menu.add_command(label="Undo", command=self.undo_text, accelerator="Ctrl+Z")
+        self.edit_menu.add_command(label="Redo", command=self.redo_text, accelerator="Ctrl+Y")
 
     def open_file(self):
         self.text.delete("1.0", "end")
@@ -54,6 +57,12 @@ class Notepad:
 
     def paste_text(self):
         self.text.event_generate("<<Paste>>")
+
+    def undo_text(self):
+        self.text.edit_undo()
+
+    def redo_text(self):
+        self.text.edit_redo()
 
 
 root = tk.Tk()
